@@ -1,5 +1,4 @@
 <h1>ログイン</h1>
-{% csrf_token %}
 <form action="{% url 'user:login' %}" method="post">
 {% csrf_token %}
 {{ form.as_p }}
