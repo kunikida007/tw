@@ -15,7 +15,7 @@ class  TestUrls(TestCase):
         view = resolve('/signup/')
         self.assertEquals(view.func, signup)
 
-class Test_ignup_get_Views(TestCase):
+class Test_signup_get_Views(TestCase):
     def setUp(self):
         self.client = Client()
         self.index_url = reverse('user:signup')
