@@ -38,7 +38,7 @@ class SigupTest(TestCase):
         response = self.client.post(
             self.index_url, 
             {'username': 'username1', 'password1': 'password', 'password2': 'password'}
-         )
+        )
   
         self.assertEqual(response.status_code, 200)
          
