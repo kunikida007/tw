@@ -17,7 +17,7 @@ class SigupTest(TestCase):
       
         self.assertTemplateUsed(response, 'user/signup.html')     
 
-    def  test_post_fails_by_existed_user(self):
+    def test_post_fails_by_existed_user(self):
 
         User.objects.create_user("username1", '', 'yy660818')
 
@@ -73,16 +73,16 @@ class SigupTest(TestCase):
         data={'username': 'username6', 'password1': 'yy660818', 'password2': 'yy660818'}
         response = self.client.post(reverse('user:signup'), data=data) 
 
-         #アカウントが作成されているか？
+         # アカウントが作成されているか？
         self.assertEqual(User.objects.filter(username='username6').count(), 1)
          
-class Login_test(TestCase):
+class LoginTest(TestCase):
 
     def test_with_not_existed_user(self):
 
         form = AuthenticationForm(data = {'username': "notexistuser", 'password': 'password_b'})
 
-        #フォームが正しくないと認識する
+         # フォームが正しくないと認識する
         self.assertFalse(form.is_valid())
 
          # ユーザー名は存在していない。
