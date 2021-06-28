@@ -52,7 +52,7 @@ class SigupTest(TestCase):
             self.index_url, 
             {'username': 'username1', 'password1': 'yy660818', 'password2': 'yy660819'}
         )
-         # エラーは表示されているか。
+        # エラーは表示されているか。
         self.assertIn('確認用パスワードが一致しません。', response.context['form'].errors["password2"])
 
     def test_failed_with_lack_password(self):
@@ -73,7 +73,7 @@ class SigupTest(TestCase):
         data={'username': 'username6', 'password1': 'yy660818', 'password2': 'yy660818'}
         response = self.client.post(reverse('user:signup'), data=data) 
 
-         # アカウントが作成されているか？
+        # アカウントが作成されているか？
         self.assertEqual(User.objects.filter(username='username6').count(), 1)
          
 class LoginTest(TestCase):
@@ -82,10 +82,10 @@ class LoginTest(TestCase):
 
         form = AuthenticationForm(data = {'username': "notexistuser", 'password': 'password_b'})
 
-         # フォームが正しくないと認識する
+        # フォームが正しくないと認識する
         self.assertFalse(form.is_valid())
 
-         # ユーザー名は存在していない。
+        # ユーザー名は存在していない。
         self.assertEqual(User.objects.filter(username='notexistuser').count(),0)
     
     def test_with_wrong_password(self):
