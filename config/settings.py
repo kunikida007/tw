@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "user",
-    "twiter",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +127,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
  
-LOGIN_URL = '/login/' 
-LOGIN_REDIRECT_URL = '/twiter/home/'
-LOGOUT_REDIRECT_URL='/login/' 
+LOGIN_URL = 'user:login' 
+LOGIN_REDIRECT_URL = 'twiter:home'
+LOGOUT_REDIRECT_URL = 'user:login'
+
