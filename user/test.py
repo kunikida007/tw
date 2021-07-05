@@ -120,4 +120,6 @@ class LoginTest(TestCase):
           
         self.assertEqual(response.status_code, 302)
        
-        self.assertRedirects(response, reverse(settings.LOGIN_REDIRECT_URL))
+        
+
+
