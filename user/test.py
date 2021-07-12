@@ -33,7 +33,7 @@ class SigupTest(TestCase):
         self.assertTemplateUsed(response, 'user/signup.html')
         self.assertIn('このパスワードは一般的すぎます。', response.context['form'].errors["password2"])
         
-    def test_faild_with_diffrent_password(self):
+    def test_failed_with_diffrent_password(self):
         response = self.client.post(
             self.index_url, 
             {'username': 'username1', 'password1': 'yy660818', 'password2': 'yy660819'}
@@ -50,11 +50,11 @@ class SigupTest(TestCase):
         self.assertTemplateUsed(response, 'user/signup.html')
         self.assertIn('このパスワードは短すぎます。最低 8 文字以上必要です。', response.context['form'].errors["password2"])
  
-    def test_post_succeds(self):
+    def test_post_succeed(self):
         data={'username': 'username6', 'password1': 'yy660818', 'password2': 'yy660818'}
         response = self.client.post(reverse('user:signup'), data=data) 
         # アカウントが作成されているか？
-        self.assertEqual(User.objects.filter(username='username6').count(), 1)
+        self.assertTrue(User.objects.filter(username='username6').exists())
          
 class LoginTest(TestCase):
 
@@ -90,6 +90,3 @@ class LoginTest(TestCase):
         self.assertEqual(User.objects.filter(username='username1').count(),1)
         self.assertEqual(response.status_code, 302)
        
-        
-
-
