@@ -90,3 +90,4 @@ class LoginTest(TestCase):
         self.assertEqual(User.objects.filter(username='username1').count(),1)
         self.assertEqual(response.status_code, 302)
        
+       
