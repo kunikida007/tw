@@ -89,4 +89,3 @@ class LoginTest(TestCase):
         response = self.client.post(reverse('user:login'), data=data)
         self.assertEqual(User.objects.filter(username='username1').count(),1)
         self.assertEqual(response.status_code, 302) 
-        
