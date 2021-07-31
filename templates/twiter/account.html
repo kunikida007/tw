@@ -1,0 +1,15 @@
+<a href="{% url "twiter:home" %}">Homeに戻る</a>　
+<h2><a>{{ user.username }}のページ</a></h2>
+
+
+<h4>{{ user.username }}のツイート</h4>
+{{ tweet_num }}ツイート&nbsp;
+
+
+    {% for tweet in tweet_list %}
+    <p>
+        <a href="{% url 'twiter:tweet_detail' pk=tweet.pk %}">{{ tweet.content }}</a>
+        <br>
+        ({{ tweet.date_posted }})
+    </p>   
+    {% endfor %} 
