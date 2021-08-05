@@ -105,4 +105,4 @@ class ListTest(TestCase):
         tweet1=Post.objects.create(author=self.user1,content=content)
         response= self.client.get(reverse('twiter:tweet_detail',kwargs={'pk':tweet1.pk}))
         self.assertContains(response,content)
-
+        

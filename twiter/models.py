@@ -9,9 +9,6 @@ class Post(models.Model):
     content = models.TextField(max_length=140)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
-    favorite = models.IntegerField(default=0)
    
     def __str__(self):
         return self.content 
-
-   

@@ -59,4 +59,4 @@ def accountpage(request, user_id):
         'tweet_num': models.Post.objects.filter(author=user_id).count(),
     }
     return render(request, 'twiter/account.html', context)    
-
+    

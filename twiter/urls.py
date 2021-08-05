@@ -12,5 +12,3 @@ urlpatterns = [
      path('delete_tweet/<int:pk>/', views.delete_tweet, name='delete_tweet'),
      path('accountpage/<int:user_id>/', views.accountpage, name='accountpage'),
 ]     
-    
-
