@@ -11,4 +11,5 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
    
     def __str__(self):
-        return self.content 
+        return self.content
+         

@@ -6,10 +6,10 @@
 {{ tweet_num }}ツイート&nbsp;
 
 
-    {% for tweet in tweet_list %}
-    <p>
-        <a href="{% url 'twiter:tweet_detail' pk=tweet.pk %}">{{ tweet.content }}</a>
-        <br>
-        ({{ tweet.date_posted }})
-    </p>   
-    {% endfor %} 
+{% for tweet in tweet_list %}
+<p>
+    <a href="{% url 'twiter:tweet_detail' pk=tweet.pk %}">{{ tweet.content }}</a>
+    <br>
+    ({{ tweet.date_posted }})
+</p>   
+{% endfor %} 
