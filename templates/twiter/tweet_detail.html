@@ -1,0 +1,12 @@
+<a href="{% url "twiter:home" %}">Homeに戻る</a>　
+<a href="{% url 'twiter:accountpage' request.user.id %}">{{ request.user.username }}</a>
+<h2>ツイートしたユーザー:<a href="{% url 'twiter:accountpage' tweet.author.id %}">{{ tweet.author }}</a></h2>
+<h3>{{ tweet.content }}</h3>
+<p>{{ tweet.date_posted }}</p>
+
+{% if request.user.id == tweet.author.id %}
+    <form method="post" action="{% url 'twiter:delete_tweet' pk=tweet.pk %}">
+    {% csrf_token %}
+    <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+  </form>
+{% endif %}

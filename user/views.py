@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import SignUpForm
 # Create your views here.
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -11,5 +12,5 @@ def signup(request):
     else:
         form = SignUpForm()
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'user/signup.html', context)
