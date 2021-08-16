@@ -10,6 +10,7 @@ class Post(models.Model):
                                on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
 
+# ユーザーにツイート権限を付与
     def perms_user(self, user):
         return self.author == user
 
