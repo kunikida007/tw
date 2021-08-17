@@ -3,6 +3,7 @@ from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from user.models import Follow
 
 
 @login_required
@@ -12,7 +13,7 @@ def home(request):
 
 @login_required
 def tweet(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             tweet = form.save(commit=False)
@@ -59,5 +60,8 @@ def accountpage(request, user_id):
         'user': user,
         'tweet_list': models.Post.objects.filter(author=user_id).order_by('-date_posted'),
         'tweet_num': models.Post.objects.filter(author=user_id).count(),
+        'following_list': user.follower.count(),
+        'follower_list': user.following.count(),
+        'is_following': Follow.objects.filter(follower__username=request.user.username, following__username=user.username).exists(),
     }
     return render(request, 'twiter/account.html', context)

@@ -1,0 +1,11 @@
+<h4><a href="{% url 'twiter:accountpage' user.id %}">{{ user.username }}</a>のフォロワー一覧</h4>
+
+{% if not follower_list %}
+    <p>{{ user.username }}にはまだフォロワーがいません。</p>
+{% else %}
+    {% for follow in follower_list %}
+    <p>
+        <li><a href="{% url 'twiter:accountpage' follow.follower.id %}">{{ follow.follower.username }}</a></li>
+    </p>
+    {% endfor %}
+{% endif %}
