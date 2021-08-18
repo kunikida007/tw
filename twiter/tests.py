@@ -52,13 +52,13 @@ class DeleteTweetTest(TestCase):
         self.client.login(username='username1', password='password_1')
 
     def test_tweet_delete(self):
-        content = "ツイート消去"
+        content = 'ツイート消去'
         tweet1 = Post.objects.create(author=self.user1, content=content)
-        self.client.post(reverse("twiter:delete_tweet", kwargs={'pk': tweet1.pk}))
+        self.client.post(reverse('twiter:delete_tweet', kwargs={'pk': tweet1.pk}))
         self.assertFalse(Post.objects.filter(author=self.user1, content=content).exists())
 
     def test_twwet_delete_with_correctuser(self):
-        content = "ツイート消去はユーザー1のみから行われるか"
+        content = 'ツイート消去はユーザー1のみから行われるか'
         self.user2 = User.objects.create_user('username2', '', 'password_2')
         self.client.login(username='username2', password='password_2')
         Post.objects.create(author=self.user2, content=content)

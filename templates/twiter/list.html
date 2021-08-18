@@ -1,4 +1,4 @@
-<a href="{% url "twiter:home" %}">Homeに戻る</a>
+<a href="{% url "twiter:home" %}">Homeに戻る</a> <a href="{% url "user:logout" %}">ログアウトする</a>
 <a href="{% url 'twiter:accountpage' request.user.id %}">{{ request.user.username }}</a>
 <h4>ツイート一覧 </h4>
 {% for tweet in tweet_list %}

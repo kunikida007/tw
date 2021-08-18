@@ -1,5 +1,21 @@
-<a href="{% url "twiter:home" %}">Homeに戻る</a>　
+<a href="{% url "twiter:home" %}">Homeに戻る</a>　<a href="{% url "user:logout" %}">ログアウトする</a>
 <h2><a>{{ user.username }}のページ</a></h2>
+
+<p>
+    <a href="{% url 'user:follow_list' user.id %}">フォロー</a>&nbsp;
+    <a href="{% url 'user:follower_list' user.id %}">フォロワー</a>&nbsp;
+
+</p>
+
+{% if request.user.id == user.id %}
+<p>　自分自身はフォローできません</p>
+{% elif is_following %}
+            <a href="{% url 'user:unfollow' user.id %}" onclick='return confirm("フォローを解除しますか？");'>
+                <button type="button">フォロー解除</button>
+            </a>
+{% else %}
+        <a href="{% url 'user:follow' user.id %}"><button type="button">フォロー</button></a>
+{% endif %}            
 
 
 <h4>{{ user.username }}のツイート</h4>

@@ -1,6 +1,7 @@
+<a href="{% url "user:logout" %}">ログアウトする</a>
 <h1>ホーム</h1>
 <h4>
     <a href="{% url 'twiter:accountpage' request.user.id %}">{{ request.user.username }}</a>
 <h4>
 <a href="{% url 'twiter:post_create' %}">ツイートする</a>
-<a href="{% url 'twiter:list' %}">ツイート一覧をみる</a>
+<a href="{% url 'twiter:list' %}">ツイート一覧</a>
