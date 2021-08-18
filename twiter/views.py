@@ -60,8 +60,6 @@ def accountpage(request, user_id):
         'user': user,
         'tweet_list': models.Post.objects.filter(author=user_id).order_by('-date_posted'),
         'tweet_num': models.Post.objects.filter(author=user_id).count(),
-        'follower_list': user.following.count(),
-        'following_list': user.follower.count(),
         'is_following': Follow.objects.filter(follower__username=request.user.username, following__username=user.username).exists(),
     }
     return render(request, 'twiter/account.html', context)
