@@ -89,6 +89,6 @@ def unfavorite(request, user_id, tweet_id):
 def tweet_favorite_detail(request, pk):
     context = {
         'pk': pk,
-        'favorite_user_list': models.Favorite.objects.filter(tweet__pk=pk).select_related('favorite_user').order_by('favorite_date')
+        'favorite_user_list': models.Favorite.objects.filter(tweet__pk=pk).select_related('favorite_user').order_by('at_favorited')
         }
     return render(request, 'twiter/tweet_favorite_detail.html', context)
