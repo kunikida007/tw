@@ -12,6 +12,6 @@ urlpatterns = [
      path('accountpage/<int:user_id>/', views.accountpage, name='accountpage'),
      path('favorite/<int:user_id>/<int:tweet_id>/', views.favorite, name='favorite'),
      path('unfavorite/<int:user_id>/<int:tweet_id>/', views.unfavorite, name='unfavorite'),
-     path('tweet_favorite_detail/<int:pk>/', views.tweet_favorite_detail, name='tweet_favorite_detail'),
+     path('tweet_favorite_detail/<int:tweet_id>/', views.tweet_favorite_detail, name='tweet_favorite_detail'),
 
 ]

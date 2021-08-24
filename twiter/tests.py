@@ -117,7 +117,7 @@ class FavoriteTest(TestCase):
     def test_favorite_in_database(self):
         self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
                          'tweet_id': self.tweet1.pk}), favorite_user=self.user1, tweet=self.tweet1)
-        self.assertTrue(Favorite.objects.filter(favorite_user=self.user1, tweet=self.tweet1).exists())
+        self.assertTrue(Favorite.objects.filter(user=self.user1, tweet=self.tweet1).exists())
 
 
 class UnFavoriteTest(TestCase):
@@ -129,12 +129,12 @@ class UnFavoriteTest(TestCase):
         content = "いいねに関するテスト"
         self.tweet1 = Post.objects.create(content=content, author=self.user1)
         self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
-                         'tweet_id': self.tweet1.pk}), favorite_user=self.user2, tweet=self.tweet1)
+                         'tweet_id': self.tweet1.pk}), user=self.user2, tweet=self.tweet1)
 
     def test_unfavorite_succeed(self):
         self.client.post(reverse('twiter:unfavorite', kwargs={'user_id': self.user2.pk,
                          'tweet_id': self.tweet1.pk}), favorite_user=self.user2, tweet=self.tweet1)
-        self.assertFalse(Favorite.objects.filter(favorite_user=self.user1, tweet=self.tweet1).exists())
+        self.assertFalse(Favorite.objects.filter(user=self.user1, tweet=self.tweet1).exists())
 
 
 class TweetFavoriteDetailTest(TestCase):
@@ -146,7 +146,7 @@ class TweetFavoriteDetailTest(TestCase):
         content = "いいねに関するテスト"
         self.tweet1 = Post.objects.create(content=content, author=self.user1)
         self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
-                         'tweet_id': self.tweet1.pk}), favorite_user=self.user2, tweet=self.tweet1)
+                         'tweet_id': self.tweet1.pk}), user=self.user2, tweet=self.tweet1)
 
     def test_favorite_in_list(self):
         response = self.client.get(reverse('twiter:tweet_favorite_detail', kwargs={'pk': self.tweet1.pk}))

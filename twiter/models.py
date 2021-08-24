@@ -20,9 +20,9 @@ class Post(models.Model):
 
 
 class Favorite(models.Model):
-    favorite_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tweet = models.ForeignKey(Post, related_name='favorites', on_delete=models.CASCADE)
-    at_favorited = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.favorite_user.username
+        return str(self.user)
