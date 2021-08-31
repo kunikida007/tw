@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Favorite
 from django.urls import reverse
 
 
@@ -103,3 +103,51 @@ class ListTest(TestCase):
         tweet = Post.objects.create(author=self.user1, content=content)
         response = self.client.get(reverse('twiter:tweet_detail', kwargs={'pk': tweet.pk}))
         self.assertContains(response, content)
+
+
+class FavoriteTest(TestCase):
+
+    def setUp(self):
+        self.user1 = User.objects.create_user('username1', '', 'password_1')
+        self.client.login(username='username1', password='password_1')
+        self.user2 = User.objects.create_user('username2', '', 'password_2')
+        content = "いいねに関するテスト"
+        self.tweet1 = Post.objects.create(content=content, author=self.user1)
+
+    def test_favorite_in_database(self):
+        self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
+                         'tweet_id': self.tweet1.pk}), favorite_user=self.user1, tweet=self.tweet1)
+        self.assertTrue(Favorite.objects.filter(user=self.user1, tweet=self.tweet1).exists())
+
+
+class UnFavoriteTest(TestCase):
+
+    def setUp(self):
+        self.user1 = User.objects.create_user('username1', '', 'password_1')
+        self.client.login(username='username1', password='password_1')
+        self.user2 = User.objects.create_user('username2', '', 'password_2')
+        content = "いいねに関するテスト"
+        self.tweet1 = Post.objects.create(content=content, author=self.user1)
+        self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
+                         'tweet_id': self.tweet1.pk}), user=self.user2, tweet=self.tweet1)
+
+    def test_unfavorite_succeed(self):
+        self.client.post(reverse('twiter:unfavorite', kwargs={'user_id': self.user2.pk,
+                         'tweet_id': self.tweet1.pk}), favorite_user=self.user2, tweet=self.tweet1)
+        self.assertFalse(Favorite.objects.filter(user=self.user1, tweet=self.tweet1).exists())
+
+
+class TweetFavoriteDetailTest(TestCase):
+
+    def setUp(self):
+        self.user1 = User.objects.create_user('username1', '', 'password_1')
+        self.client.login(username='username1', password='password_1')
+        self.user2 = User.objects.create_user('username2', '', 'password_2')
+        content = "いいねに関するテスト"
+        self.tweet1 = Post.objects.create(content=content, author=self.user1)
+        self.client.post(reverse('twiter:favorite', kwargs={'user_id': self.user1.pk,
+                         'tweet_id': self.tweet1.pk}), user=self.user2, tweet=self.tweet1)
+
+    def test_favorite_in_list(self):
+        response = self.client.get(reverse('twiter:tweet_favorite_detail', kwargs={'pk': self.tweet1.pk}))
+        self.assertContains(response, self.user1.username)

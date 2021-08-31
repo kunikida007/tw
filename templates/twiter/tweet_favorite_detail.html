@@ -1,0 +1,9 @@
+<a href="{% url "twiter:home" %}">Homeに戻る</a>　<a href="{% url "user:logout" %}">ログアウトする</a> 
+<a href="{% url 'twiter:accountpage' request.user.id %}">{{ request.user.username }}</a>
+<h4>このツイートをいいねしたアカウント</h4>
+
+{% for favorite_user in favorite_user_list %}
+<p>
+    <li><a href="{% url 'twiter:accountpage' favorite_user.id %}">{{ favorite_user }}</a></li>
+</p>
+{% endfor %}

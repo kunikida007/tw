@@ -4,6 +4,18 @@
 <h3>{{ tweet.content }}</h3>
 <p>{{ tweet.date_posted }}</p>
 
+{% if favorited%}
+        <a href="{% url 'twiter:unfavorite' request.user.id tweet.id%}" onclick='return confirm("いいねを解除しますか？");'>
+                <button type="button">いいね解除</button>
+        </a>
+ {% else %}
+        <a href="{% url 'twiter:favorite' request.user.id tweet.id%}" >
+                <button type="button">いいね</button>    
+{% endif %}
+
+<p><a href="{% url 'twiter:tweet_favorite_detail' tweet.pk %}">{% if fav_num != 0 %}{{ fav_num }} いいねした人を見る{% endif %}</a></p>
+
+
 {% if request.user.id == tweet.author.id %}
     <form method="post" action="{% url 'twiter:delete_tweet' pk=tweet.pk %}">
     {% csrf_token %}
